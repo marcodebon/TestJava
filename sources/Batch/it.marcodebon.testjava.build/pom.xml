@@ -1,0 +1,94 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>it.marcodebon</groupId>
+  <artifactId>it.marcodebon.testjava.build</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>TestJava</name>
+  
+  <parent>
+	<groupId>it.bnl.arch</groupId>
+	<artifactId>it.bnl.arch.parent</artifactId>    
+	<version>2.0.0</version>
+  </parent>
+  <properties>
+	<maven.compiler.source>1.7</maven.compiler.source>
+	<maven.compiler.target>1.7</maven.compiler.target>
+	<project.build.sourceEncoding>ISO8859_3</project.build.sourceEncoding>
+  </properties>
+
+  <profiles>
+    <profile>
+
+      <id>bnl</id>
+      <modules>
+        <module>../it.marcodebon.testjava</module>
+      </modules>
+	  
+	  <properties>
+		<jar.module.dir>../it.marcodebon.testjava</jar.module.dir>
+		<release.base.dir>${project.build.directory}/_release</release.base.dir>
+	  </properties>
+	  
+	  <distributionManagement>
+		  <repository>
+			<id>test-winwinit</id>
+			<name>Docker Nexus</name>
+			<url>http://localhost:9080/nexus/repository/maven-winwinit/</url>
+		  </repository>
+	  </distributionManagement>
+	  
+	  <build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<includeEmptyDirs>true</includeEmptyDirs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>COPY-ENVIRONMENTS</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${release.base.dir}/environments-config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/resources/env/</directory>
+									<excludes>
+										<exclude>development/</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>COPY-JAR</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${release.base.dir}/environments-config/all</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${jar.module.dir}/target/</directory>
+									<includes>
+										<include>*.jar</include>
+										<include>lib/*.jar</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>					
+				</executions>
+			</plugin>
+		</plugins>
+	  </build>
+    </profile>
+
+  </profiles>
+</project>
