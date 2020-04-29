@@ -17,7 +17,7 @@ import it.marcodebon.testjava.beans.SimpleResult;
 import it.marcodebon.testjava.beans.Tipologia;
 
 public class Database {
-	final static Logger logger = LogManager.getLogger(Database.class);
+	private final static Logger logger = LogManager.getLogger(Database.class);
 	
 	private static Connection conn = null;
 	private static long phaseStartTime;
