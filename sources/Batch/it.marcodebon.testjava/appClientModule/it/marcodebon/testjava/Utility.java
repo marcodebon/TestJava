@@ -33,14 +33,13 @@ public class Utility {
         return String.format("%02d:%02d:%02d.%03d", hr, min, sec, ms);
 	}
 	
-	public static String replaceDatePattern(String str, Date date) {
+	public static String replaceDatePattern(String s, Date date) {
 		SimpleDateFormat sdfAnno = new SimpleDateFormat("yyyy");    
 		SimpleDateFormat sdfData = new SimpleDateFormat("yyyyMMdd");    
 		SimpleDateFormat sdfOra  = new SimpleDateFormat("HHmmss");
-		str = str.replaceAll("<anno>", sdfAnno.format(date));
-		str = str.replaceAll("<data>", sdfData.format(date));
-		str = str.replaceAll("<ora>", sdfOra.format(date));
-		return str;
+		return s.replaceAll("<anno>", sdfAnno.format(date))
+				.replaceAll("<data>", sdfData.format(date))
+				.replaceAll("<ora>", sdfOra.format(date));
 	}
 	
 	//-----------------------------------------------------------------------------------------------------
