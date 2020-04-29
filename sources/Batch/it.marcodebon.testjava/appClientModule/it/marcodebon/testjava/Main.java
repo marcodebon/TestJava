@@ -27,8 +27,8 @@ import it.marcodebon.testjava.beans.Tipologia;
 public class Main {
 
 	final static Logger logger = LogManager.getLogger(Main.class);
-	static List<String> errorList;
-	static Date mainDate;
+	private static List<String> errorList;
+	private static Date mainDate;
 
 	public static void main(String[] args) {
 
@@ -91,7 +91,7 @@ public class Main {
 		}
 		
 		logger.debug("Pulizia cartella temporanea");
-		Utility.clearDirectory(new File(Settings.dir.temp));
+		Utility.clearDirectory(new File(Settings.Dir.temp));
 		
 		logger.debug("Caricamento tipologie");
 		List<Tipologia> tipologie = Database.listaTipologie(raggruppamento);
@@ -162,7 +162,7 @@ public class Main {
 			logger.error("Errore nel parse della data di presentazione del protocollo (usata la data di elaborazione)");
 			date = mainDate;
 		}
-		if(sistemaAlimentante.equals("PREFISI")) {
+		if("PREFISI".equals(sistemaAlimentante)) {
 		    source = "02";
 		    logger.trace("  Source: {}", source);
 		}else {
@@ -178,8 +178,8 @@ public class Main {
 	
 	private static void elaboraTipologia(List<FileFIS> fileFIS, String outFile, Tipologia tipologia, String destDir) {
 		String protocollo = null;
-		File tmpFileUNIX = new File(Settings.dir.temp, outFile+"-UNIX");
-		File tmpFileDOS = new File(Settings.dir.temp, outFile+"-DOS");
+		File tmpFileUNIX = new File(Settings.Dir.temp, outFile+"-UNIX");
+		File tmpFileDOS = new File(Settings.Dir.temp, outFile+"-DOS");
 		for (FileFIS file : fileFIS) {
 			long id = file.getId();
 			String nomeFile = file.getNomeFile();

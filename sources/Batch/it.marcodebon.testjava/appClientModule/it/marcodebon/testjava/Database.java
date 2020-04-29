@@ -31,20 +31,20 @@ public class Database {
 	 * @return Esito dell'operazione
 	 */
 	public static boolean init() {
-		logger.trace("[init] - Caricamento driver jdbc '{}' in corso...", Settings.db.driver);
+		logger.trace("[init] - Caricamento driver jdbc '{}' in corso...", Settings.Db.driver);
 		phaseStartTime = System.currentTimeMillis();
 		try {
-			Class.forName(Settings.db.driver);
+			Class.forName(Settings.Db.driver);
 		} catch (ClassNotFoundException ex) {
-			logger.fatal("[init] - JDBC Driver '{}' non trovato: forse un problema di classpath ?", Settings.db.driver);
+			logger.fatal("[init] - JDBC Driver '{}' non trovato: forse un problema di classpath ?", Settings.Db.driver);
 			return false;
 		}
 		logger.trace("[init] - Driver jdbc caricato in {}", Utility.elapsedTime(phaseStartTime));
 		
-		logger.trace("[init] - Connessione a database con stringa di connessione '{}' e username '{}' in corso...", Settings.db.connectionString, Settings.db.username);
+		logger.trace("[init] - Connessione a database con stringa di connessione '{}' e username '{}' in corso...", Settings.Db.connectionString, Settings.Db.username);
 		phaseStartTime = System.currentTimeMillis();
 		try {
-			conn = DriverManager.getConnection(Settings.db.connectionString, Settings.db.username, Settings.db.password);
+			conn = DriverManager.getConnection(Settings.Db.connectionString, Settings.Db.username, Settings.Db.password);
 		} catch (SQLException ex) {
 			logger.fatal("[init] - Connessione a database fallita: {} (SQLState: {})", ex.getMessage(), ex.getSQLState());
 			return false;

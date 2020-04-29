@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Utility {
 
-	final static Logger logger = LogManager.getLogger(Utility.class);
+	private final static Logger logger = LogManager.getLogger(Utility.class);
 	
 	//-----------------------------------------------------------------------------------------------------
 	// Time
@@ -33,14 +33,14 @@ public class Utility {
         return String.format("%02d:%02d:%02d.%03d", hr, min, sec, ms);
 	}
 	
-	public static String replaceDatePattern(String s, Date date) {
+	public static String replaceDatePattern(String str, Date date) {
 		SimpleDateFormat sdfAnno = new SimpleDateFormat("yyyy");    
 		SimpleDateFormat sdfData = new SimpleDateFormat("yyyyMMdd");    
 		SimpleDateFormat sdfOra  = new SimpleDateFormat("HHmmss");
-		s = s.replaceAll("<anno>", sdfAnno.format(date));
-		s = s.replaceAll("<data>", sdfData.format(date));
-		s = s.replaceAll("<ora>", sdfOra.format(date));
-		return s;
+		str = str.replaceAll("<anno>", sdfAnno.format(date));
+		str = str.replaceAll("<data>", sdfData.format(date));
+		str = str.replaceAll("<ora>", sdfOra.format(date));
+		return str;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------
@@ -113,8 +113,8 @@ public class Utility {
 
         // Get a Properties object
         Properties props = System.getProperties();
-        props.setProperty("mail.smtp.host", Settings.mail.host);
-        props.setProperty("mail.smtp.port", Settings.mail.port);
+        props.setProperty("mail.smtp.host", Settings.Mail.host);
+        props.setProperty("mail.smtp.port", Settings.Mail.port);
 
         // quitwait = true: waits the response to the QUIT command; false: don't
         props.put("mail.smtps.quitwait", "false");
@@ -125,10 +125,10 @@ public class Utility {
 
         // Set the FROM and TO fields
         try {
-			msg.setFrom(new InternetAddress(Settings.mail.from));
-			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Settings.mail.to));
-			if (Settings.mail.cc != null && !Settings.mail.cc.isEmpty())
-				msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(Settings.mail.cc));
+			msg.setFrom(new InternetAddress(Settings.Mail.from));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Settings.Mail.to));
+			if (Settings.Mail.cc != null && !Settings.Mail.cc.isEmpty())
+				msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(Settings.Mail.cc));
 			
 			msg.setSubject(subject);
 			msg.setContent(message, "text/html; charset=utf-8");

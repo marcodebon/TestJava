@@ -10,16 +10,16 @@ import org.apache.logging.log4j.Logger;
 
 public class Settings {
 
-	final static Logger logger = LogManager.getLogger(Settings.class);
+	private final static Logger logger = LogManager.getLogger(Settings.class);
 
-	public static class db {
+	public static class Db {
 		public static String driver;
 		public static String connectionString;
 		public static String username;
 		public static String password;
 	}
 	
-	public static class mail {
+	public static class Mail {
 		public static String host;
 		public static String port;
 		public static String from;
@@ -27,7 +27,7 @@ public class Settings {
 		public static String cc;
 	}
 	
-	public static class dir {
+	public static class Dir {
 		public static String temp;
 	}
 
@@ -35,27 +35,27 @@ public class Settings {
 		Properties properties = new Properties();
 		properties.load(new FileInputStream("config/configurations.properties"));
 		
-		db.driver = properties.get("db.driver").toString();
-		db.connectionString = properties.get("db.connectionString").toString();
-		db.username = properties.get("db.username").toString();
-		db.password = properties.get("db.password").toString();
+		Db.driver = properties.get("db.driver").toString();
+		Db.connectionString = properties.get("db.connectionString").toString();
+		Db.username = properties.get("db.username").toString();
+		Db.password = properties.get("db.password").toString();
 	
-		mail.host = properties.get("mail.host").toString();
-		mail.port = properties.get("mail.port").toString();
-		mail.from = properties.get("mail.from").toString();
-		mail.to = properties.get("mail.to").toString();
-		mail.cc = null;
+		Mail.host = properties.get("mail.host").toString();
+		Mail.port = properties.get("mail.port").toString();
+		Mail.from = properties.get("mail.from").toString();
+		Mail.to = properties.get("mail.to").toString();
+		Mail.cc = null;
 		
-		dir.temp = properties.get("dir.temp").toString();
+		Dir.temp = properties.get("dir.temp").toString();
 
-		logger.info("db.driver..........: '{}'", db.driver);
-		logger.info("db.connectionString: '{}'", db.connectionString);
-		logger.info("db.username........: '{}'", db.username);
-		logger.info("db.password........: '{}'", db.password);
-		logger.info("mail.host..........: '{}'", mail.host);
-		logger.info("mail.port..........: '{}'", mail.port);
-		logger.info("mail.from..........: '{}'", mail.from);
-		logger.info("mail.to............: '{}'", mail.to);
-		logger.info("dir.temp...........: '{}'", dir.temp);
+		logger.info("db.driver..........: '{}'", Db.driver);
+		logger.info("db.connectionString: '{}'", Db.connectionString);
+		logger.info("db.username........: '{}'", Db.username);
+		logger.info("db.password........: '{}'", Db.password);
+		logger.info("mail.host..........: '{}'", Mail.host);
+		logger.info("mail.port..........: '{}'", Mail.port);
+		logger.info("mail.from..........: '{}'", Mail.from);
+		logger.info("mail.to............: '{}'", Mail.to);
+		logger.info("dir.temp...........: '{}'", Dir.temp);
 	}
 }

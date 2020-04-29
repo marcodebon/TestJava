@@ -28,7 +28,7 @@ public class GenericBean<T> {
 		        		case java.sql.Types.LONGVARBINARY:	setter.invoke(entity, rs.getBytes(i));	break;
 		        		//STRING
 		        		default: 
-		        			if(rs.getString(i) == null || rs.getString(i) == "")
+		        			if(rs.getString(i) == null || "".equals(rs.getString(i)))
 		        				setter.invoke(entity, "");
 		        			else
 		        				setter.invoke(entity, rs.getString(i).trim());
